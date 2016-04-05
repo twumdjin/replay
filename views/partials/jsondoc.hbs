@@ -1,0 +1,18 @@
+<div method="{{#if _id}}PUT{{else}}POST{{/if}}" action="/{{_id}}" class="form json" role="form">
+  {{#if _id}}
+    <input name="_id" value="{{_id}}" type="hidden" />
+  {{/if}}
+  <div class="form-group input-group">
+    <span class="input-group-addon form-label">Path</span>
+    <input name="path" value="{{path}}" class="form-control" placeholder="e.g. foo/bar for api/foo/bar"/>
+  </div>
+  <div class="form-group input-group">
+    <span class="input-group-addon form-label">Method</span>
+    <input name="method" value="{{#if method}}{{method}}{{else}}POST{{/if}}" class="form-control"/>
+  </div>
+  <div class="form-group">
+    <div class="form-label">JSON:</div>
+    <textarea class="form-control" name="content" rows="5">{{content}}</textarea>
+  </div>
+  <button type="submit" class="btn btn-success">{{#if _id}}Update{{else}}Save{{/if}}</button>
+</div>

@@ -5,9 +5,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var Datastore = require('nedb');
+var docsDb = new Datastore({ filename: 'db/responses.db', autoload: true });
 
 var app = express();
 
@@ -27,8 +26,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+var router = require('./routes/index')(docsDb);
+app.use('/', router);
+router.stack.forEach(function(r){
+  if (r.route && r.route.path){
+    console.log(r.route.path)
+  }
+});
+
+router = require('./routes/api')(docsDb);
+router.stack.forEach(function(r){
+  if (r.route && r.route.path){
+    console.log(r.route.path)
+  }
+});
+app.use('/api/', router);
+
+app._router.stack.forEach(function(r){
+  if (r.route && r.route.path){
+    console.log(r.route.path)
+  }
+});
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

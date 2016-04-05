@@ -1,1 +1,19 @@
-<h1>Example App: Home</h1>
+<div class="container">
+<h1>Configure responses</h1>
+<p>Enter a new path and response.</p>
+{{> jsondoc}}
+<table class="table table-striped">
+  <thead>
+    <tr><td><h3>Existing paths</h3></td></tr>
+  </thead>
+  <tbody>
+    {{#each docs}}
+      <tr>
+        <td>
+          {{> jsondoc this}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>

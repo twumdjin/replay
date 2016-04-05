@@ -1,6 +1,9 @@
 # Project files
 .project
 
+# db files
+db/
+
 # Logs
 logs
 *.log
