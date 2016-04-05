@@ -4,14 +4,16 @@ var router = express.Router();
 
 var docsDb;
 
-router.all('/*', function(req, res) {
+router.all('/*', function(req, res, next) {
 	debug('In dynamic API route %s', req.path);
 	var path = req.path.replace(/^\//, ''),
 		method = req.method;
 	docsDb.findOne({path: path, method: method}, function(err, doc) {
 		if (err || !doc) {
 			debug('No configuration for %s %s', method, path);
-			res.status(404).send();
+			var err = new Error('Not Found');
+		  err.status = 404;
+		  next(err);
 			return;
 		}
 		debug('Dynamically routing %s %s using %s', method, path, doc._id);

@@ -14,5 +14,8 @@
     <div class="form-label">JSON:</div>
     <textarea class="form-control" name="content" rows="5">{{content}}</textarea>
   </div>
-  <button type="submit" class="btn btn-success">{{#if _id}}Update{{else}}Save{{/if}}</button>
+  <button type="submit" class="btn btn-success save">{{#if _id}}Update{{else}}Save{{/if}}</button>
+  {{#if _id}}
+    <button type="submit" class="btn btn-danger delete">Delete</button>
+  {{/if}}
 </div>
