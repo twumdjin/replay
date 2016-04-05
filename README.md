@@ -20,4 +20,12 @@ can also install express by following instruction on the [express site](http://e
 We use the handlebars template but you can also serve plain old HTML files from the public directory by placing them
 in the appropriate location.
 
+## Running Oasis in Docker
+```sh
+$ docker run -it -p 3000:3000 -v /home/docker/oasis/db:/usr/src/app/db --name oasis gcr.io/goodwatercap-1/oasis:latest
+``
+
+The app will be running on port 3000.`
+
+
 
